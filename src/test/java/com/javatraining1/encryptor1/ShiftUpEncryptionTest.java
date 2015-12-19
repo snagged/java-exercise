@@ -5,8 +5,8 @@ import org.junit.Test;
 public class ShiftUpEncryptionTest extends EncryptionAlgorithmTest {
 
     @Test
-    public void test() {
-        super.test();
+    public void genericEncryptionAlgorithmTest() {
+        super.genericEncryptionAlgorithmTest();
     }
 
     public ShiftUpEncryptionTest() {

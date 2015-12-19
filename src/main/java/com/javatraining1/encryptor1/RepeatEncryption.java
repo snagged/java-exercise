@@ -1,25 +1,33 @@
 package com.javatraining1.encryptor1;
 
 public class RepeatEncryption implements EncryptionAlgorithm {
-    private EncryptionAlgorithm EA;
+    private EncryptionAlgorithm EncryptionAlgorithm;
     private int n;
 
     public RepeatEncryption(EncryptionAlgorithm EA, int n) {
-        this.EA = EA;
+        this.EncryptionAlgorithm = EA;
         this.n = n;
     }
 
-    public String encrypt(String plaintext, int key) {
+    public String encrypt(String plaintext, Key key) {
         for (int i = 0; i < n; i++) {
-            plaintext = EA.encrypt(plaintext, key);
+            plaintext = EncryptionAlgorithm.encrypt(plaintext, key);
         }
         return plaintext;
     }
 
-    public String decrypt(String ciphertext, int key) {
+    public String decrypt(String ciphertext, Key key) {
         for (int i = 0; i < n; i++) {
-            ciphertext = EA.decrypt(ciphertext, key);
+            ciphertext = EncryptionAlgorithm.decrypt(ciphertext, key);
         }
         return ciphertext;
+    }
+
+    public int getKeyStrength() {
+        return EncryptionAlgorithm.getKeyStrength();
+    }
+
+    public String getName() {
+        return "Repeat Encryption";
     }
 }

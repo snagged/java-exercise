@@ -2,26 +2,27 @@ package com.javatraining1.encryptor1;
 
 import static org.junit.Assert.*;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class EncryptionAlgorithmTest {
 
-    private EncryptionAlgorithm EA;
+    private EncryptionAlgorithm EncryptionAlgorithm;
 
-    public void test() {
-        assertEquals("Testing intensifies",
-                EA.decrypt(EA.encrypt("Testing intensifies", 42), 42));
-        int key = ThreadLocalRandom.current().nextInt(1, 1000 + 1);
-        assertEquals("Testing intensifies",
-                EA.decrypt(EA.encrypt("Testing intensifies", key), key));
+    public void genericEncryptionAlgorithmTest() {
+        /*
+         * assertEquals("Testing intensifies",
+         * EncryptionAlgorithm.decrypt(EncryptionAlgorithm.encrypt(
+         * "Testing intensifies", new Key(42)), new Key(42)));
+         */
+        Key key = new Key(true);
+        assertEquals("Testing intensifies", EncryptionAlgorithm.decrypt(
+                EncryptionAlgorithm.encrypt("Testing intensifies", key), key));
     }
 
     public EncryptionAlgorithmTest(EncryptionAlgorithm EA) {
-        this.EA = EA;
+        this.EncryptionAlgorithm = EA;
     }
 
     public void setEA(EncryptionAlgorithm EA) {
-        this.EA = EA;
+        this.EncryptionAlgorithm = EA;
     }
 
 }

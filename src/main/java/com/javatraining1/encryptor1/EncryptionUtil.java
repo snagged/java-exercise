@@ -20,36 +20,24 @@ public class EncryptionUtil {
         return wholeChars;
     }
 
-    public static String genericEncrypt(String plaintext, int key, int x) {
+    public static String genericEncrypt(String plaintext, Key key,
+            SimpleEncryption simpleEncryption) {
         StringBuilder sb = new StringBuilder(plaintext.length());
         for (int i = 0; i < plaintext.length(); i++) {
-            if (x == 0) {
-                // shift multiply encryption
-                sb.append((int) (plaintext.charAt(i) * key));
-            } else if (x == 1) {
-                // shift up encryption
-                sb.append((int) (plaintext.charAt(i) + key));
-            } else if (x == 2) {
-                // xor encryption
-                sb.append((int) ((short) plaintext.charAt(i) ^ (short) key));
-            }
+            sb.append((int) (simpleEncryption.operation(plaintext.charAt(i),
+                    key.getKey1())));
             sb.append('.');
         }
         return sb.toString();
     }
 
-    public static String genericDecrypt(String ciphertext, int key, int x) {
+    public static String genericDecrypt(String ciphertext, Key key,
+            SimpleEncryption simpleEncryption) {
         StringBuilder sb = new StringBuilder(ciphertext.length());
         Vector<Integer> wholeChars = EncryptionUtil.reform(ciphertext);
         for (int i = 0; i < wholeChars.size(); i++) {
-            if (x == 0) {// shift multiply encryption
-                sb.append((char) (wholeChars.elementAt(i) / key));
-            } else if (x == 1) {// shift up encryption
-                sb.append((char) (wholeChars.elementAt(i) - key));
-            } else if (x == 2) {// xor encryption
-                sb.append((char) ((short) (int) wholeChars.elementAt(i)
-                        ^ (short) key));
-            }
+            sb.append((char) (simpleEncryption
+                    .reverseOperation(wholeChars.elementAt(i), key.getKey1())));
         }
         return sb.toString();
     }

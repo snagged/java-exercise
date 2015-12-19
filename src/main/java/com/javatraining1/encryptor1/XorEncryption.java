@@ -1,11 +1,21 @@
 package com.javatraining1.encryptor1;
 
-public class XorEncryption implements EncryptionAlgorithm {
-    public String encrypt(String plaintext, int key) {
-        return EncryptionUtil.genericEncrypt(plaintext, key, 2);
+public class XorEncryption extends SimpleEncryption
+        implements EncryptionAlgorithm {
+
+    public int operation(char c, int i) {
+        return (int) ((short) c ^ (short) i);
     }
 
-    public String decrypt(String ciphertext, int key) {
-        return EncryptionUtil.genericDecrypt(ciphertext, key, 2);
+    public int reverseOperation(Integer c, int i) {
+        return (int) ((short) (int) c ^ (short) i);
+    }
+
+    public int getKeyStrength() {
+        return 5;
+    }
+
+    public String getName() {
+        return "Xor Encryption";
     }
 }

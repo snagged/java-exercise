@@ -1,11 +1,21 @@
 package com.javatraining1.encryptor1;
 
-public class ShiftUpEncryption implements EncryptionAlgorithm {
-    public String encrypt(String plaintext, int key) {
-        return EncryptionUtil.genericEncrypt(plaintext, key, 1);
+public class ShiftUpEncryption extends SimpleEncryption
+        implements EncryptionAlgorithm {
+
+    public int operation(char c, int i) {
+        return (int) (c + i);
     }
 
-    public String decrypt(String ciphertext, int key) {
-        return EncryptionUtil.genericDecrypt(ciphertext, key, 1);
+    public int reverseOperation(Integer c, int i) {
+        return (int) (c - i);
+    }
+
+    public int getKeyStrength() {
+        return 10;
+    }
+
+    public String getName() {
+        return "Shift Up Encryption";
     }
 }
